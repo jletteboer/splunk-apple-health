@@ -1,0 +1,507 @@
+<form>
+  <label>Apple Health</label>
+  <fieldset submitButton="false"></fieldset>
+  <row>
+    <panel>
+      <html>
+        <center>
+          <font style="letter-spacing: normal; font-size: 14px; font-weight: normal; rgb(85, 85, 85); opacity: 1;">First Step is set on</font>
+        </center>
+      </html>
+      <viz type="status_indicator_app.status_indicator">
+        <search>
+          <query>index="apple" sourcetype="csv:apple:health" source="*StepCount.csv" 
+| stats last(_time) as First
+| eval First=strftime(First, "%F %T"), icon="hourglass-start", color="#006ba4"
+| fields First icon color</query>
+          <earliest>0</earliest>
+          <latest></latest>
+          <sampleRatio>1</sampleRatio>
+        </search>
+        <option name="drilldown">none</option>
+        <option name="height">100</option>
+        <option name="status_indicator_app.status_indicator.colorBy">static_color</option>
+        <option name="status_indicator_app.status_indicator.fillTarget">text</option>
+        <option name="status_indicator_app.status_indicator.fixIcon">warning</option>
+        <option name="status_indicator_app.status_indicator.icon">field_value</option>
+        <option name="status_indicator_app.status_indicator.precision">0</option>
+        <option name="status_indicator_app.status_indicator.showOption">3</option>
+        <option name="status_indicator_app.status_indicator.staticColor">#006ba4</option>
+        <option name="status_indicator_app.status_indicator.useColors">true</option>
+        <option name="status_indicator_app.status_indicator.useThousandSeparator">true</option>
+        <option name="trellis.enabled">0</option>
+        <option name="trellis.scales.shared">1</option>
+        <option name="trellis.size">medium</option>
+      </viz>
+      <html>
+        <center>
+          <font style="letter-spacing: normal; font-size: 14px; font-weight: normal; rgb(85, 85, 85); opacity: 1;">Lastest Step is set on</font>
+        </center>
+      </html>
+      <viz type="status_indicator_app.status_indicator">
+        <search>
+          <query>index="apple" sourcetype="csv:apple:health" source="*StepCount.csv"
+| stats first(_time) as Last
+| eval First=strftime(Last, "%F %T"), icon="hourglass-end", color="#006ba4"
+| fields First icon color</query>
+          <earliest>0</earliest>
+          <latest></latest>
+          <sampleRatio>1</sampleRatio>
+        </search>
+        <option name="drilldown">none</option>
+        <option name="height">100</option>
+        <option name="status_indicator_app.status_indicator.colorBy">static_color</option>
+        <option name="status_indicator_app.status_indicator.fillTarget">text</option>
+        <option name="status_indicator_app.status_indicator.fixIcon">warning</option>
+        <option name="status_indicator_app.status_indicator.icon">field_value</option>
+        <option name="status_indicator_app.status_indicator.precision">0</option>
+        <option name="status_indicator_app.status_indicator.showOption">3</option>
+        <option name="status_indicator_app.status_indicator.staticColor">#006ba4</option>
+        <option name="status_indicator_app.status_indicator.useColors">true</option>
+        <option name="status_indicator_app.status_indicator.useThousandSeparator">true</option>
+        <option name="trellis.enabled">0</option>
+        <option name="trellis.scales.shared">1</option>
+        <option name="trellis.size">medium</option>
+      </viz>
+    </panel>
+    <panel>
+      <html>
+        <center>
+          <font style="letter-spacing: normal; font-size: 14px; font-weight: normal; rgb(85, 85, 85); opacity: 1;">Average Steps per day is</font>
+        </center>
+      </html>
+      <single>
+        <search>
+          <query>index="apple" sourcetype="csv:apple:health" source="*StepCount.csv" 
+| timechart span=1d sum(value) as value 
+| stats avg(value)</query>
+          <earliest>0</earliest>
+          <latest></latest>
+          <sampleRatio>1</sampleRatio>
+        </search>
+        <option name="colorBy">value</option>
+        <option name="colorMode">none</option>
+        <option name="drilldown">none</option>
+        <option name="height">100</option>
+        <option name="numberPrecision">0</option>
+        <option name="rangeColors">["0xFF2B24","0x006ba4"]</option>
+        <option name="rangeValues">[0]</option>
+        <option name="showSparkline">1</option>
+        <option name="showTrendIndicator">1</option>
+        <option name="trellis.enabled">0</option>
+        <option name="trellis.scales.shared">1</option>
+        <option name="trellis.size">medium</option>
+        <option name="trendColorInterpretation">standard</option>
+        <option name="trendDisplayMode">absolute</option>
+        <option name="unitPosition">after</option>
+        <option name="useColors">1</option>
+        <option name="useThousandSeparators">0</option>
+      </single>
+      <html>
+        <center>
+          <font style="letter-spacing: normal; font-size: 14px; font-weight: normal; rgb(85, 85, 85); opacity: 1;">with a average of</font>
+        </center>
+      </html>
+      <single>
+        <search>
+          <query>index="apple" sourcetype="csv:apple:health" source="*DistanceWalkingRunning.csv" 
+| timechart span=1d sum(value) as value
+| stats avg(value)</query>
+          <earliest>0</earliest>
+          <latest></latest>
+          <sampleRatio>1</sampleRatio>
+        </search>
+        <option name="colorBy">value</option>
+        <option name="colorMode">none</option>
+        <option name="drilldown">none</option>
+        <option name="height">100</option>
+        <option name="numberPrecision">0.0</option>
+        <option name="rangeColors">["0xFF2B24","0x006ba4"]</option>
+        <option name="rangeValues">[0]</option>
+        <option name="showSparkline">1</option>
+        <option name="showTrendIndicator">1</option>
+        <option name="trellis.enabled">0</option>
+        <option name="trellis.scales.shared">1</option>
+        <option name="trellis.size">medium</option>
+        <option name="trendColorInterpretation">standard</option>
+        <option name="trendDisplayMode">absolute</option>
+        <option name="underLabel">Kilometer per day</option>
+        <option name="unitPosition">after</option>
+        <option name="useColors">1</option>
+        <option name="useThousandSeparators">0</option>
+      </single>
+    </panel>
+    <panel>
+      <html>
+        <center>
+          <font style="letter-spacing: normal; font-size: 14px; font-weight: normal; rgb(85, 85, 85); opacity: 1;">The most active day is</font>
+        </center>
+      </html>
+      <viz type="status_indicator_app.status_indicator">
+        <search>
+          <query>index="apple" sourcetype="csv:apple:health" source="*StepCount.csv"  
+| timechart span=1d sum(value) as value 
+| eventstats max(value) as maxvalue 
+| where value=maxvalue
+| eval date=strftime(_time,"%A %d %B %Y")
+| fields date</query>
+          <earliest>0</earliest>
+          <sampleRatio>1</sampleRatio>
+        </search>
+        <option name="drilldown">none</option>
+        <option name="height">100</option>
+        <option name="status_indicator_app.status_indicator.colorBy">static_color</option>
+        <option name="status_indicator_app.status_indicator.fillTarget">text</option>
+        <option name="status_indicator_app.status_indicator.fixIcon">times-circle</option>
+        <option name="status_indicator_app.status_indicator.icon">fix_icon</option>
+        <option name="status_indicator_app.status_indicator.precision">0</option>
+        <option name="status_indicator_app.status_indicator.showOption">3</option>
+        <option name="status_indicator_app.status_indicator.staticColor">#006ba4</option>
+        <option name="status_indicator_app.status_indicator.useColors">true</option>
+        <option name="status_indicator_app.status_indicator.useThousandSeparator">true</option>
+        <option name="trellis.enabled">0</option>
+        <option name="trellis.scales.shared">1</option>
+        <option name="trellis.size">medium</option>
+      </viz>
+      <html>
+        <center>
+          <font style="letter-spacing: normal; font-size: 14px; font-weight: normal; rgb(85, 85, 85); opacity: 1;">with a total of</font>
+        </center>
+      </html>
+      <single>
+        <search>
+          <query>index="apple" sourcetype="csv:apple:health" source="*StepCount.csv" 
+| timechart span=1d sum(value) as value 
+| stats max(value) as maxvalue</query>
+          <earliest>0</earliest>
+          <sampleRatio>1</sampleRatio>
+        </search>
+        <option name="drilldown">none</option>
+        <option name="height">100</option>
+        <option name="rangeColors">["0x65a637","0x006ba4"]</option>
+        <option name="rangeValues">[0]</option>
+        <option name="underLabel">Steps</option>
+        <option name="useColors">1</option>
+        <option name="useThousandSeparators">0</option>
+      </single>
+    </panel>
+    <panel>
+      <html>
+        <center>
+          <img width="85%" src="/static/app/apple_health/AppleHealth.png"/>
+        </center>
+      </html>
+    </panel>
+  </row>
+  <row>
+    <panel>
+      <title>Steps by day/week/month</title>
+      <input type="dropdown" token="token_span" searchWhenChanged="true">
+        <label>Span (day/weel/month)</label>
+        <choice value="1d">Day</choice>
+        <choice value="1w">Week</choice>
+        <choice value="1mon">Month</choice>
+        <default>1d</default>
+      </input>
+      <input type="dropdown" token="token_overlay" searchWhenChanged="true">
+        <label>Overlay</label>
+        <choice value="| fields _time Steps">None</choice>
+        <choice value="| fields _time Steps Kilometers">Kilometers</choice>
+        <default>None</default>
+      </input>
+      <chart>
+        <search>
+          <query>index=apple sourcetype="csv:apple:health" source="*StepCount.csv" OR source="*DistanceWalkingRunning.csv" 
+| rex field=source "(?P&lt;source&gt;\w+(?:\.\w+))" 
+| timechart sum(value) as value span=$token_span$ by source 
+| rename StepCount.csv AS Steps, DistanceWalkingRunning.csv AS Kilometers $token_overlay$</query>
+          <earliest>0</earliest>
+          <latest></latest>
+          <sampleRatio>1</sampleRatio>
+        </search>
+        <option name="charting.axisLabelsX.majorLabelStyle.overflowMode">ellipsisNone</option>
+        <option name="charting.axisLabelsX.majorLabelStyle.rotation">0</option>
+        <option name="charting.axisTitleX.text">Time</option>
+        <option name="charting.axisTitleX.visibility">collapsed</option>
+        <option name="charting.axisTitleY.text">Steps</option>
+        <option name="charting.axisTitleY.visibility">visible</option>
+        <option name="charting.axisTitleY2.visibility">visible</option>
+        <option name="charting.axisX.scale">linear</option>
+        <option name="charting.axisY.scale">linear</option>
+        <option name="charting.axisY2.enabled">1</option>
+        <option name="charting.axisY2.scale">inherit</option>
+        <option name="charting.chart">line</option>
+        <option name="charting.chart.bubbleMaximumSize">50</option>
+        <option name="charting.chart.bubbleMinimumSize">10</option>
+        <option name="charting.chart.bubbleSizeBy">area</option>
+        <option name="charting.chart.nullValueMode">gaps</option>
+        <option name="charting.chart.overlayFields">Kilometers</option>
+        <option name="charting.chart.showDataLabels">none</option>
+        <option name="charting.chart.sliceCollapsingThreshold">0.01</option>
+        <option name="charting.chart.stackMode">default</option>
+        <option name="charting.chart.style">shiny</option>
+        <option name="charting.drilldown">none</option>
+        <option name="charting.fieldColors">{"Steps":0x006BA4, "Kilometers":0xFF800E}</option>
+        <option name="charting.layout.splitSeries">0</option>
+        <option name="charting.layout.splitSeries.allowIndependentYRanges">0</option>
+        <option name="charting.legend.labelStyle.overflowMode">ellipsisMiddle</option>
+        <option name="charting.legend.placement">bottom</option>
+        <option name="trellis.enabled">0</option>
+        <option name="trellis.scales.shared">1</option>
+        <option name="trellis.size">medium</option>
+      </chart>
+    </panel>
+  </row>
+  <row>
+    <panel>
+      <title>Total Steps by weekday</title>
+      <chart>
+        <search>
+          <query>index="apple" sourcetype="csv:apple:health" source="*StepCount.csv" 
+| stats sum(value) AS Value by date_wday
+| eval Weekend=if(date_wday="saturday" OR date_wday="sunday",Value,null()) 
+| eval Weekday=if(date_wday!="saturday" AND date_wday!="sunday",Value,null()) 
+| table date_wday Weekday Weekend
+| eval wd=case(date_wday=="monday",1, date_wday=="tuesday",2, date_wday=="wednesday",3, date_wday=="thursday",4, date_wday=="friday",5, date_wday=="saturday",6, date_wday=="sunday",7)
+| sort wd
+| fields - wd</query>
+          <earliest>0</earliest>
+          <sampleRatio>1</sampleRatio>
+        </search>
+        <option name="charting.axisLabelsX.majorLabelStyle.overflowMode">ellipsisNone</option>
+        <option name="charting.axisLabelsX.majorLabelStyle.rotation">0</option>
+        <option name="charting.axisTitleX.text">Weekday</option>
+        <option name="charting.axisTitleX.visibility">collapsed</option>
+        <option name="charting.axisTitleY.visibility">visible</option>
+        <option name="charting.axisTitleY2.visibility">visible</option>
+        <option name="charting.axisX.scale">linear</option>
+        <option name="charting.axisY.scale">linear</option>
+        <option name="charting.axisY2.enabled">0</option>
+        <option name="charting.axisY2.scale">inherit</option>
+        <option name="charting.chart">bar</option>
+        <option name="charting.chart.bubbleMaximumSize">50</option>
+        <option name="charting.chart.bubbleMinimumSize">10</option>
+        <option name="charting.chart.bubbleSizeBy">area</option>
+        <option name="charting.chart.nullValueMode">gaps</option>
+        <option name="charting.chart.showDataLabels">none</option>
+        <option name="charting.chart.sliceCollapsingThreshold">0.01</option>
+        <option name="charting.chart.stackMode">stacked</option>
+        <option name="charting.chart.style">shiny</option>
+        <option name="charting.drilldown">none</option>
+        <option name="charting.layout.splitSeries">0</option>
+        <option name="charting.layout.splitSeries.allowIndependentYRanges">0</option>
+        <option name="charting.legend.labelStyle.overflowMode">ellipsisMiddle</option>
+        <option name="charting.legend.placement">bottom</option>
+        <option name="charting.fieldColors">{"Weekday":0x006BA4,"Weekend":0xFF800E}</option>
+        <option name="trellis.enabled">0</option>
+        <option name="trellis.scales.shared">1</option>
+        <option name="trellis.size">medium</option>
+      </chart>
+    </panel>
+    <panel>
+      <title>Steps by hours on weekday</title>
+      <viz type="punchcard_app.punchcard">
+        <search>
+          <query>index="apple" sourcetype="csv:apple:health" source="*StepCount.csv" 
+| stats sum(value) as value by date_hour date_wday</query>
+          <earliest>0</earliest>
+          <latest></latest>
+          <sampleRatio>1</sampleRatio>
+        </search>
+        <option name="drilldown">none</option>
+        <option name="punchcard_app.punchcard.colorMode">sequential</option>
+        <option name="punchcard_app.punchcard.labelRotation">angle</option>
+        <option name="punchcard_app.punchcard.maxColor">#3fc77a</option>
+        <option name="punchcard_app.punchcard.minColor">#d93f3c</option>
+        <option name="punchcard_app.punchcard.numOfBins">3</option>
+        <option name="punchcard_app.punchcard.radiusScale">local</option>
+        <option name="punchcard_app.punchcard.useColors">false</option>
+        <option name="trellis.enabled">0</option>
+        <option name="trellis.scales.shared">1</option>
+        <option name="trellis.size">medium</option>
+      </viz>
+    </panel>
+  </row>
+  <row>
+    <panel>
+      <title>Step Trend</title>
+      <chart>
+        <search>
+          <query>index="apple" sourcetype="csv:apple:health" source="*StepCount.csv"
+| rex field=source "(?P&lt;source&gt;\w+(?:\.\w+))" 
+| timechart sum(value) as value span=$token_span$ by source 
+| rename StepCount.csv AS Steps 
+| `lineartrend(_time,Steps)` 
+| fields _time Steps newY 
+| rename newY AS Trend</query>
+          <earliest>0</earliest>
+          <sampleRatio>1</sampleRatio>
+        </search>
+        <option name="charting.axisLabelsX.majorLabelStyle.overflowMode">ellipsisNone</option>
+        <option name="charting.axisLabelsX.majorLabelStyle.rotation">0</option>
+        <option name="charting.axisTitleX.text">Time</option>
+        <option name="charting.axisTitleX.visibility">collapsed</option>
+        <option name="charting.axisTitleY.visibility">visible</option>
+        <option name="charting.axisTitleY2.visibility">visible</option>
+        <option name="charting.axisX.scale">linear</option>
+        <option name="charting.axisY.scale">linear</option>
+        <option name="charting.axisY2.enabled">0</option>
+        <option name="charting.axisY2.scale">inherit</option>
+        <option name="charting.chart">line</option>
+        <option name="charting.chart.bubbleMaximumSize">50</option>
+        <option name="charting.chart.bubbleMinimumSize">10</option>
+        <option name="charting.chart.bubbleSizeBy">area</option>
+        <option name="charting.chart.nullValueMode">gaps</option>
+        <option name="charting.chart.showDataLabels">none</option>
+        <option name="charting.chart.sliceCollapsingThreshold">0.01</option>
+        <option name="charting.chart.stackMode">default</option>
+        <option name="charting.chart.style">shiny</option>
+        <option name="charting.drilldown">none</option>
+        <option name="charting.fieldColors">{"Steps":0x006BA4, "Trend":0xFF800E}</option>
+        <option name="charting.layout.splitSeries">0</option>
+        <option name="charting.layout.splitSeries.allowIndependentYRanges">0</option>
+        <option name="charting.legend.labelStyle.overflowMode">ellipsisMiddle</option>
+        <option name="charting.legend.placement">bottom</option>
+        <option name="trellis.enabled">0</option>
+        <option name="trellis.scales.shared">1</option>
+        <option name="trellis.size">medium</option>
+      </chart>
+    </panel>
+    <panel>
+      <title>Upgoing Step Trend</title>
+      <viz type="status_indicator_app.status_indicator">
+        <search>
+          <query>index="apple" sourcetype="csv:apple:health" source="*StepCount.csv" 
+| rex field=source "(?P&lt;source&gt;\w+(?:\.\w+))" 
+| timechart sum(value) as value span=1d by source 
+| rename StepCount.csv AS Steps 
+| `lineartrend(_time,Steps)` 
+| fields _time Steps newY 
+| rename newY AS Trend
+| stats first(Trend) as f, latest(Trend) as l
+| eval icon=if(f&lt;l,"thumbs-o-up","thumbs-o-down"), color=if(f&lt;l,"green","red")
+| fields icon l color</query>
+          <earliest>0</earliest>
+          <latest></latest>
+          <sampleRatio>1</sampleRatio>
+        </search>
+        <option name="drilldown">none</option>
+        <option name="status_indicator_app.status_indicator.colorBy">field_value</option>
+        <option name="status_indicator_app.status_indicator.fillTarget">text</option>
+        <option name="status_indicator_app.status_indicator.fixIcon">warning</option>
+        <option name="status_indicator_app.status_indicator.icon">field_value</option>
+        <option name="status_indicator_app.status_indicator.precision">0</option>
+        <option name="status_indicator_app.status_indicator.showOption">2</option>
+        <option name="status_indicator_app.status_indicator.staticColor">#555</option>
+        <option name="status_indicator_app.status_indicator.useColors">true</option>
+        <option name="status_indicator_app.status_indicator.useThousandSeparator">true</option>
+        <option name="trellis.enabled">0</option>
+        <option name="trellis.scales.shared">1</option>
+        <option name="trellis.size">medium</option>
+      </viz>
+    </panel>
+  </row>
+  <row>
+    <panel>
+      <title>Kilometer Trend</title>
+      <chart>
+        <search>
+          <query>index=apple sourcetype="csv:apple:health" source="*DistanceWalkingRunning.csv"
+| rex field=source "(?P&lt;source&gt;\w+(?:\.\w+))" 
+| timechart sum(value) as value span=$token_span$ by source 
+| rename DistanceWalkingRunning.csv AS Kilometers 
+| `lineartrend(_time,Kilometers)` 
+| fields _time Kilometers newY 
+| rename newY AS Trend</query>
+          <earliest>0</earliest>
+          <latest></latest>
+          <sampleRatio>1</sampleRatio>
+        </search>
+        <option name="charting.axisLabelsX.majorLabelStyle.overflowMode">ellipsisNone</option>
+        <option name="charting.axisLabelsX.majorLabelStyle.rotation">0</option>
+        <option name="charting.axisTitleX.text">Time</option>
+        <option name="charting.axisTitleX.visibility">collapsed</option>
+        <option name="charting.axisTitleY.visibility">visible</option>
+        <option name="charting.axisTitleY2.visibility">visible</option>
+        <option name="charting.axisX.scale">linear</option>
+        <option name="charting.axisY.scale">linear</option>
+        <option name="charting.axisY2.enabled">0</option>
+        <option name="charting.axisY2.scale">inherit</option>
+        <option name="charting.chart">line</option>
+        <option name="charting.chart.bubbleMaximumSize">50</option>
+        <option name="charting.chart.bubbleMinimumSize">10</option>
+        <option name="charting.chart.bubbleSizeBy">area</option>
+        <option name="charting.chart.nullValueMode">gaps</option>
+        <option name="charting.chart.showDataLabels">none</option>
+        <option name="charting.chart.sliceCollapsingThreshold">0.01</option>
+        <option name="charting.chart.stackMode">default</option>
+        <option name="charting.chart.style">shiny</option>
+        <option name="charting.drilldown">none</option>
+        <option name="charting.fieldColors">{"Kilometers":0x006BA4, "Trend":0xFF800E}</option>
+        <option name="charting.layout.splitSeries">0</option>
+        <option name="charting.layout.splitSeries.allowIndependentYRanges">0</option>
+        <option name="charting.legend.labelStyle.overflowMode">ellipsisMiddle</option>
+        <option name="charting.legend.placement">bottom</option>
+        <option name="trellis.enabled">0</option>
+        <option name="trellis.scales.shared">1</option>
+        <option name="trellis.size">medium</option>
+      </chart>
+    </panel>
+    <panel>
+      <title>Upgoing Kilometer Trend</title>
+      <viz type="status_indicator_app.status_indicator">
+        <search>
+          <query>index=apple sourcetype="csv:apple:health" source="*DistanceWalkingRunning.csv"  
+| rex field=source "(?P&lt;source&gt;\w+(?:\.\w+))" 
+| timechart sum(value) as value span=1d by source 
+| rename DistanceWalkingRunning.csv AS Kilometer 
+| `lineartrend(_time,Kilometer)` 
+| fields _time Kilometer newY 
+| rename newY AS Trend
+| stats first(Trend) as f, latest(Trend) as l
+| eval icon=if(f&lt;l,"thumbs-o-up","thumbs-o-down"), color=if(f&lt;l,"green","red")
+| fields icon l color</query>
+          <earliest>0</earliest>
+          <latest></latest>
+          <sampleRatio>1</sampleRatio>
+        </search>
+        <option name="drilldown">none</option>
+        <option name="status_indicator_app.status_indicator.colorBy">field_value</option>
+        <option name="status_indicator_app.status_indicator.fillTarget">text</option>
+        <option name="status_indicator_app.status_indicator.fixIcon">warning</option>
+        <option name="status_indicator_app.status_indicator.icon">field_value</option>
+        <option name="status_indicator_app.status_indicator.precision">0</option>
+        <option name="status_indicator_app.status_indicator.showOption">2</option>
+        <option name="status_indicator_app.status_indicator.staticColor">#555</option>
+        <option name="status_indicator_app.status_indicator.useColors">true</option>
+        <option name="status_indicator_app.status_indicator.useThousandSeparator">true</option>
+        <option name="trellis.enabled">0</option>
+        <option name="trellis.scales.shared">1</option>
+        <option name="trellis.size">medium</option>
+      </viz>
+    </panel>
+  </row>
+  <row>
+    <panel>
+      <title>Outlier Days</title>
+      <viz type="Splunk_ML_Toolkit.OutliersViz">
+        <search>
+          <query>index="apple" sourcetype="csv:apple:health" source="*StepCount.csv"
+| timechart span=1d sum(value) as Value 
+| eventstats median("Value") as median p25("Value") as p25 p75("Value") as p75 
+| eval IQR=(p75-p25) 
+| eval lowerBound=(p25-(IQR*1.5))
+| eval upperBound=(p75+(IQR*1.5)) 
+| eval isOutlier=if('Value' &lt; lowerBound OR 'Value' &gt; upperBound, 1, 0)
+| table _time Value lowerBound upperBound</query>
+          <earliest>0</earliest>
+          <sampleRatio>1</sampleRatio>
+        </search>
+        <option name="drilldown">none</option>
+        <option name="trellis.enabled">0</option>
+        <option name="trellis.scales.shared">1</option>
+        <option name="trellis.size">medium</option>
+      </viz>
+    </panel>
+  </row>
+</form>

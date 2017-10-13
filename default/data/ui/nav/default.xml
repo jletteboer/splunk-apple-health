@@ -1,5 +1,6 @@
-<nav search_view="search" color="#65A637">
-  <view name="search" default='true' />
+<nav search_view="search" color="#FF2B24">
+  <view name="apple_health" default='true' />
+  <view name="search" />
   <view name="datasets" />
   <view name="reports" />
   <view name="alerts" />
