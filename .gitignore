@@ -1,0 +1,5 @@
+# Ignore all csv files
+*.csv
+
+# OS X
+.DS_Store
