@@ -6,6 +6,6 @@
 
 # App local data
 local
-metadata
+metadata/local.meta
 
 # Packaged versions of the app
