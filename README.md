@@ -1,8 +1,17 @@
-Apple Health App for Splunk version 0.1
+Apple Health App for Splunk
+===========================
 
-For documentation, see: https://github.com/jletteboer/splunk-apple-health.
+Requirements
+------------
+* [**Splunk Enterprise 6.6+**](https://www.spunk.com)
+* [**Apple Health**](https://www.apple.com/ios/health/)
 
-======
+**Installed Splunk Add-ons**
+
+* [**Machine Learning Toolkit**](https://splunkbase.splunk.com/app/2890/)
+* [**Python for Scientific Computing**](https://splunkbase.splunk.com/app/2890/#/details)
+* [**Punchcard**](https://splunkbase.splunk.com/app/3129/)
+* [**Status Indicator**](https://splunkbase.splunk.com/app/3119/)
 
 Installation
 ------------
