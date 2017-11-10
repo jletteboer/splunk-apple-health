@@ -65,6 +65,8 @@ Adding your own Apple Health data
 
 Follow my [blog](http://www.networkx.nl/data-science/visualising-health-data/) for exporting, transforming the data.
 
+If the data is transformed save the csv files into the **$SPLUNK\_HOME/etc/apps/apple_health/data/** directory.
+
 License
 -------
 
